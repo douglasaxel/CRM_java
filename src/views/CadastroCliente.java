@@ -7,6 +7,8 @@ package views;
 
 import bean.Cliente;
 import dao.ClienteDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,9 +57,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         tfSobreNome = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        ftCelular = new javax.swing.JTextField();
         cbRegiao = new javax.swing.JComboBox<>();
         ftTelefone = new javax.swing.JFormattedTextField();
+        ftCelular = new javax.swing.JFormattedTextField();
 
         tfNomeSobre1.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfNomeSobre1.setText("Douglas Souza Axel Kjellin");
@@ -178,12 +180,26 @@ public class CadastroCliente extends javax.swing.JFrame {
         jDateChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(62, 194, 235)));
         jDateChooser1.setDateFormatString("dd/MM/yyyy");
 
-        ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        ftCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
-        ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
-
         cbRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zona Norte", "Zona Nordeste", "Zona Leste", "Região do Glória e do Cristal", "Zona Sul", "Região do Partenon", "Zona Extremo Sul" }));
         cbRegiao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
+
+        ftTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
+        try {
+            ftTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftTelefone.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        ftTelefone.setSelectionColor(new java.awt.Color(62, 194, 235));
+
+        ftCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
+        try {
+            ftCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -202,7 +218,6 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(tfEmail)
                     .addComponent(ftCPF)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ftCelular, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbRegiao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +232,8 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addComponent(jLabel18)
                             .addComponent(jLabel13))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ftTelefone))
+                    .addComponent(ftTelefone)
+                    .addComponent(ftCelular, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -253,12 +269,12 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addComponent(cbRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
-                .addGap(8, 8, 8)
-                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,13 +315,17 @@ public class CadastroCliente extends javax.swing.JFrame {
         } else if (tfSobreNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
         } else {
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            Date d = jDateChooser1.getDate();
+            String data = f.format(d);
             Cliente c = new Cliente();
             ClienteDAO dao = new ClienteDAO();
-            
+            JOptionPane.showMessageDialog(null, data);
+
             c.setNome(tfNome.getText().trim());
             c.setSobrenome(tfSobreNome.getText().trim());
             c.setCpf(ftCPF.getText().trim());
-            c.setData_nasc(jDateChooser1.getDate().toString());
+            c.setData_nasc(data);
             c.setEndereco(tfEndereco.getText().trim());
             c.setBairro(tfBairro.getText().trim());
             c.setRegiao(cbRegiao.getSelectedItem().toString());
@@ -314,9 +334,9 @@ public class CadastroCliente extends javax.swing.JFrame {
             c.setEmail(tfEmail.getText().trim());
             c.setDescricao(jTextArea1.getText().trim());
             dao.create(c);
-            Dashboard db = new Dashboard();
-//            db.setVisible(true);
-            db.readJTable();
+            Dashboard dash = new Dashboard();
+            dash.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -359,7 +379,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JComboBox<String> cbRegiao;
     private javax.swing.JFormattedTextField ftCPF;
-    private javax.swing.JTextField ftCelular;
+    private javax.swing.JFormattedTextField ftCelular;
     private javax.swing.JFormattedTextField ftTelefone;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel11;

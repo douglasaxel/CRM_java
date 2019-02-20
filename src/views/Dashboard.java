@@ -27,7 +27,6 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
         this.lblData.setText(this.formato.format(this.data));
-        lblBemVindo.setText(l.logado);
         readJTable();
     }
 
@@ -480,7 +479,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(59, 59, 59))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,8 +565,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         new CadastroCliente().setVisible(true);
-        Dashboard db = new Dashboard();
-        db.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -713,10 +711,6 @@ public class Dashboard extends javax.swing.JFrame {
         });
     }
 
-    public void readUser() {
-
-    }
-
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
@@ -831,7 +825,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lblBemVindo;
+    public javax.swing.JLabel lblBemVindo;
     private javax.swing.JLabel lblData;
     private javax.swing.JComboBox<String> selFiltrar;
     private javax.swing.JTextField tfBairro;

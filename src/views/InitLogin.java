@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class InitLogin extends javax.swing.JFrame {
 
-    public String logado = "";
-
     public InitLogin() {
         initComponents();
 //        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
@@ -149,8 +147,9 @@ public class InitLogin extends javax.swing.JFrame {
         String usu = txtUsuario.getText();
         char[] pass = txtSenha.getPassword();
         if (readUsuario(usu) && readSenha(pass)) {
-            this.logado = buscarUsuario().getNome();
-            new Dashboard().setVisible(true);
+            Dashboard d = new Dashboard();
+            d.lblBemVindo.setText(buscarUsuario().getNome());
+            d.setVisible(true);
             this.dispose();
         } else {
             lblErro.setText("Usuário ou senha inválidos.");
@@ -170,8 +169,9 @@ public class InitLogin extends javax.swing.JFrame {
             String usu = txtUsuario.getText();
             char[] pass = txtSenha.getPassword();
             if (readUsuario(usu) && readSenha(pass)) {
-                this.logado = buscarUsuario().getNome();
-                new Dashboard().setVisible(true);
+                Dashboard d = new Dashboard();
+                d.lblBemVindo.setText(buscarUsuario().getNome());
+                d.setVisible(true);
                 this.dispose();
             } else {
                 lblErro.setText("Usuário ou senha inválidos.");
@@ -184,8 +184,9 @@ public class InitLogin extends javax.swing.JFrame {
             String usu = txtUsuario.getText();
             char[] pass = txtSenha.getPassword();
             if (readUsuario(usu) && readSenha(pass)) {
-                this.logado = buscarUsuario().getNome();
-                new Dashboard().setVisible(true);
+                Dashboard d = new Dashboard();
+                d.lblBemVindo.setText(buscarUsuario().getNome());
+                d.setVisible(true);
                 this.dispose();
             } else {
                 lblErro.setText("Usuário ou senha inválidos.");
