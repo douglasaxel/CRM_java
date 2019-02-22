@@ -33,6 +33,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -69,9 +72,6 @@
               <Color PropertyName="color" blue="3e" green="c6" red="8b" type="rgb"/>
             </LineBorder>
           </Border>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
@@ -337,9 +337,6 @@
               <Color blue="eb" green="c2" red="3e" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBairroActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfEmail">
           <Properties>

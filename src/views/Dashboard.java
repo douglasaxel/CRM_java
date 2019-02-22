@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -93,7 +94,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setAutoscrolls(true);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,11 +184,6 @@ public class Dashboard extends javax.swing.JFrame {
         tfBairro.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfBairro.setBorder(null);
         tfBairro.setSelectionColor(new java.awt.Color(62, 194, 235));
-        tfBairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBairroActionPerformed(evt);
-            }
-        });
 
         tfRegiao.setEditable(false);
         tfRegiao.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
@@ -436,11 +431,6 @@ public class Dashboard extends javax.swing.JFrame {
                 txtFiltrarMouseClicked(evt);
             }
         });
-        txtFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFiltrarActionPerformed(evt);
-            }
-        });
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltrarKeyReleased(evt);
@@ -551,25 +541,30 @@ public class Dashboard extends javax.swing.JFrame {
         this.setState(InitLogin.ICONIFIED);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void tfBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBairroActionPerformed
-
     private void txtFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFiltrarMouseClicked
         txtFiltrar.setText("");
     }//GEN-LAST:event_txtFiltrarMouseClicked
 
-    private void txtFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltrarActionPerformed
-
-    }//GEN-LAST:event_txtFiltrarActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        new CadastroCliente().setVisible(true);
-        this.dispose();
+        if (CadastroCliente.instance == null) {
+            CadastroCliente.instance = new CadastroCliente();
+            CadastroCliente.instance.setVisible(true);
+        } else {
+            CadastroCliente.instance.setVisible(true);
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        new AlterarCliente().setVisible(true);
+        if (AlterarCliente.instance == null) {
+            if (jTable1.isRowSelected(jTable1.getSelectedRow())) {
+                AlterarCliente.instance = new AlterarCliente(Long.parseLong(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                AlterarCliente.instance.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um cliente para alterar os dados.");
+            }
+        } else {
+            AlterarCliente.instance.setVisible(true);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void lblBemVindoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBemVindoMouseClicked

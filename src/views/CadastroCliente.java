@@ -17,9 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroCliente
-     */
+    public static CadastroCliente instance = null;
+
     public CadastroCliente() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
@@ -70,10 +69,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         setTitle("Cadastro de Cliente");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setAutoscrolls(true);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,11 +137,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         tfBairro.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfBairro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
         tfBairro.setSelectionColor(new java.awt.Color(62, 194, 235));
-        tfBairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBairroActionPerformed(evt);
-            }
-        });
 
         tfEmail.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
@@ -303,10 +301,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBairroActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (tfNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
@@ -320,7 +314,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             String data = f.format(d);
             Cliente c = new Cliente();
             ClienteDAO dao = new ClienteDAO();
-            JOptionPane.showMessageDialog(null, data);
 
             c.setNome(tfNome.getText().trim());
             c.setSobrenome(tfSobreNome.getText().trim());
@@ -332,17 +325,30 @@ public class CadastroCliente extends javax.swing.JFrame {
             c.setTelefone(ftTelefone.getText().trim());
             c.setCelular(ftCelular.getText().trim());
             c.setEmail(tfEmail.getText().trim());
-            c.setDescricao(jTextArea1.getText().trim());
-            dao.create(c);
-            Dashboard dash = new Dashboard();
-            dash.setVisible(true);
-            this.dispose();
+            c.setDescricao(jTextArea1.getText());
+            if (JOptionPane.showConfirmDialog(null, "Cliente cadastrado com sucesso!\n\nCadastrar novo cliente?", "",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                tfNome.setText("");
+                tfSobreNome.setText("");
+                ftCPF.setText("");
+                jDateChooser1.setDate(new Date());
+                tfEndereco.setText("");
+                tfBairro.setText("");
+                cbRegiao.setSelectedIndex(0);
+                ftTelefone.setText("");
+                ftCelular.setText("");
+                tfEmail.setText("");
+                jTextArea1.setText("");
+            } else {
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        instance = null;
+    }//GEN-LAST:event_formWindowClosed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

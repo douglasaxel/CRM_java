@@ -7,6 +7,11 @@ package views;
 
 import bean.Cliente;
 import dao.ClienteDAO;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,12 +20,60 @@ import javax.swing.JOptionPane;
  */
 public class AlterarCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AlterarCliente
-     */
+    public static AlterarCliente instance = null;
+    ClienteDAO dao;
+    List<Cliente> cl;
+    Cliente c;
+
     public AlterarCliente() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
+    }
+
+    public AlterarCliente(long id) {
+        initComponents();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
+        dao = new ClienteDAO();
+        cl = dao.search_by_id(String.valueOf(id));
+        c = cl.get(0);
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        Date data;
+        try {
+            data = f.parse(c.getData_nasc());
+            jDateChooser1.getDateEditor().setDate(data);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel converter a data!");
+        }
+
+        tfNome.setText(c.getNome());
+        tfSobreNome.setText(c.getSobrenome());
+        ftCPF.setText(c.getCpf());
+        tfEndereco.setText(c.getEndereco());
+        tfBairro.setText(c.getBairro());
+
+        int op = 0;
+        String r = String.valueOf(dao.search_by_regiao(c.getRegiao()));
+        if (r.equalsIgnoreCase("zona norte")) {
+            op = 0;
+        } else if (r.equalsIgnoreCase("zona nordeste")) {
+            op = 1;
+        } else if (r.equalsIgnoreCase("zona leste")) {
+            op = 2;
+        } else if (r.equalsIgnoreCase("região do glória e do cristal")) {
+            op = 3;
+        } else if (r.equalsIgnoreCase("zona sul")) {
+            op = 4;
+        } else if (r.equalsIgnoreCase("região do partenon")) {
+            op = 5;
+        } else if (r.equalsIgnoreCase("zona extremo sul")) {
+            op = 6;
+        }
+
+        cbRegiao.getItemAt(op);
+        ftTelefone.setText(c.getTelefone());
+        ftCelular.setText(c.getCelular());
+        tfEmail.setText(c.getEmail());
+        jTextArea1.setText(c.getDescricao());
     }
 
     /**
@@ -33,7 +86,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel8 = new javax.swing.JPanel();
-        btnCadastrar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         tfNome = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
         ftCelular = new javax.swing.JTextField();
@@ -61,20 +114,24 @@ public class AlterarCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar informações");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
         jPanel8.setAutoscrolls(true);
 
-        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alterar.png"))); // NOI18N
-        btnCadastrar.setBorder(null);
-        btnCadastrar.setBorderPainted(false);
-        btnCadastrar.setContentAreaFilled(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alterar.png"))); // NOI18N
+        btnAlterar.setBorder(null);
+        btnAlterar.setBorderPainted(false);
+        btnAlterar.setContentAreaFilled(false);
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -100,11 +157,6 @@ public class AlterarCliente extends javax.swing.JFrame {
         tfBairro.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfBairro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
         tfBairro.setSelectionColor(new java.awt.Color(62, 194, 235));
-        tfBairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBairroActionPerformed(evt);
-            }
-        });
 
         tfEndereco.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEndereco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
@@ -189,7 +241,7 @@ public class AlterarCliente extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(tfNome)
                     .addComponent(tfSobreNome)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
@@ -265,7 +317,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -284,11 +336,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBairroActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         if (tfNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
         } else if (tfSobreNome.getText().trim().equals("")) {
@@ -296,26 +344,32 @@ public class AlterarCliente extends javax.swing.JFrame {
         } else if (tfSobreNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
         } else {
-            Cliente c = new Cliente();
-            ClienteDAO dao = new ClienteDAO();
-            
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            Date d = jDateChooser1.getDate();
+            String data = f.format(d);
+
             c.setNome(tfNome.getText().trim());
             c.setSobrenome(tfSobreNome.getText().trim());
             c.setCpf(ftCPF.getText().trim());
-            c.setData_nasc(jDateChooser1.getDateFormatString());
+            c.setData_nasc(data);
             c.setEndereco(tfEndereco.getText().trim());
             c.setBairro(tfBairro.getText().trim());
             c.setRegiao(cbRegiao.getSelectedItem().toString());
             c.setTelefone(ftTelefone.getText().trim());
             c.setCelular(ftCelular.getText().trim());
             c.setEmail(tfEmail.getText().trim());
-            c.setDescricao(jTextArea1.getText().trim());
+            c.setDescricao(jTextArea1.getText());
             dao.update(c);
             Dashboard db = new Dashboard();
-//            db.setVisible(true);
             db.readJTable();
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+            this.dispose();
         }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        instance = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -353,7 +407,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JComboBox<String> cbRegiao;
     private javax.swing.JFormattedTextField ftCPF;
     private javax.swing.JTextField ftCelular;

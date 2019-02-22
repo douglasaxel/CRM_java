@@ -84,6 +84,7 @@ public class ClienteDAO {
             stmt.setString(9, c.getCelular());
             stmt.setString(10, c.getEmail());
             stmt.setString(11, c.getDescricao());
+            stmt.setString(12, String.valueOf(c.getId()));
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados no banco de dados!\n" + ex);

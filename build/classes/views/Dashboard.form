@@ -46,9 +46,6 @@
             </LineBorder>
           </Border>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
         <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
       <Constraints>
@@ -367,9 +364,6 @@
               <Color blue="eb" green="c2" red="3e" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBairroActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfRegiao">
           <Properties>
@@ -799,7 +793,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFiltrarMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFiltrarActionPerformed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFiltrarKeyReleased"/>
           </Events>
         </Component>
