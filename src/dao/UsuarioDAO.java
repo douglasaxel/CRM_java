@@ -63,6 +63,7 @@ public class UsuarioDAO {
             stmt.setString(2, u.getSobrenome());
             stmt.setString(3, u.getLogin());
             stmt.setString(4, u.getSenha());
+            stmt.setString(5, String.valueOf(u.getId()));
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados no banco de dados!\n" + ex);

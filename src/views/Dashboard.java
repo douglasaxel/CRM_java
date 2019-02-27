@@ -596,11 +596,13 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         if (jTable1.getSelectedRow() != 1) {
-            ClienteDAO dao = new ClienteDAO();
-            Cliente c = new Cliente();
-            c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
-            dao.delete(c);
-            readJTable();
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar os dados de " + tfNomeSobre.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                ClienteDAO dao = new ClienteDAO();
+                Cliente c = new Cliente();
+                c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                dao.delete(c);
+                readJTable();
+            }
         }
     }//GEN-LAST:event_btnDeletarActionPerformed
 
@@ -664,7 +666,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            if (jTable1.getSelectedRow() != 1) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar os dados de " + tfNomeSobre.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ClienteDAO dao = new ClienteDAO();
                 Cliente c = new Cliente();
                 c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));

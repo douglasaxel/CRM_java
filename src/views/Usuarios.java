@@ -1,9 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
+
+import bean.Usuario;
+import dao.UsuarioDAO;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,12 +13,10 @@ package views;
  */
 public class Usuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Usuarios
-     */
     public Usuarios() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
+        ReadJTable();
     }
 
     /**
@@ -32,12 +32,12 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel76 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
         jLabel78 = new javax.swing.JLabel();
-        tfNome13 = new javax.swing.JTextField();
-        tfBairro13 = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
+        tfUsuario = new javax.swing.JTextField();
         jLabel79 = new javax.swing.JLabel();
-        tfSobreNome13 = new javax.swing.JTextField();
-        jPasswordField27 = new javax.swing.JPasswordField();
-        jPasswordField28 = new javax.swing.JPasswordField();
+        tfSobreNome = new javax.swing.JTextField();
+        jpRepetirSenha = new javax.swing.JPasswordField();
+        jpSenha = new javax.swing.JPasswordField();
         jLabel80 = new javax.swing.JLabel();
         btnCadastrar14 = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -51,7 +51,6 @@ public class Usuarios extends javax.swing.JFrame {
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        jPanel17.setForeground(new java.awt.Color(255, 255, 255));
         jPanel17.setAutoscrolls(true);
         jPanel17.setPreferredSize(new java.awt.Dimension(330, 333));
 
@@ -67,14 +66,14 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel78.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel78.setText("Ususário:");
 
-        tfNome13.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        tfNome13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
-        tfNome13.setSelectionColor(new java.awt.Color(62, 194, 235));
+        tfNome.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        tfNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
+        tfNome.setSelectionColor(new java.awt.Color(62, 194, 235));
 
-        tfBairro13.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        tfBairro13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
-        tfBairro13.setSelectionColor(new java.awt.Color(62, 194, 235));
-        tfBairro13.addActionListener(new java.awt.event.ActionListener() {
+        tfUsuario.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        tfUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
+        tfUsuario.setSelectionColor(new java.awt.Color(62, 194, 235));
+        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfBairroActionPerformed(evt);
             }
@@ -84,16 +83,16 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel79.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel79.setText("Sobrenome:");
 
-        tfSobreNome13.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        tfSobreNome13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
-        tfSobreNome13.setSelectionColor(new java.awt.Color(62, 194, 235));
+        tfSobreNome.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        tfSobreNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
+        tfSobreNome.setSelectionColor(new java.awt.Color(62, 194, 235));
 
-        jPasswordField27.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        jPasswordField27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        jPasswordField27.setPreferredSize(new java.awt.Dimension(2, 28));
+        jpRepetirSenha.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        jpRepetirSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
+        jpRepetirSenha.setPreferredSize(new java.awt.Dimension(2, 28));
 
-        jPasswordField28.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        jPasswordField28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
+        jpSenha.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        jpSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
 
         jLabel80.setBackground(new java.awt.Color(255, 255, 255));
         jLabel80.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
@@ -123,6 +122,11 @@ public class Usuarios extends javax.swing.JFrame {
         btnDeletar.setBorder(null);
         btnDeletar.setBorderPainted(false);
         btnDeletar.setContentAreaFilled(false);
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -131,11 +135,11 @@ public class Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfNome13)
-                    .addComponent(tfSobreNome13)
-                    .addComponent(tfBairro13, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPasswordField27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordField28)
+                    .addComponent(tfNome)
+                    .addComponent(tfSobreNome)
+                    .addComponent(tfUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpRepetirSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpSenha)
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel76)
@@ -159,23 +163,23 @@ public class Usuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel76)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNome13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel79)
                 .addGap(1, 1, 1)
-                .addComponent(tfSobreNome13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel78)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfBairro13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel80)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel77)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField27, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpRepetirSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,20 +192,16 @@ public class Usuarios extends javax.swing.JFrame {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
 
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nome", "Sobrenome", "Usuario"
+                "ID", "Nome", "Sobrenome", "Usuario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -210,7 +210,21 @@ public class Usuarios extends javax.swing.JFrame {
         });
         jTable1.setGridColor(new java.awt.Color(194, 85, 156));
         jTable1.setSelectionBackground(new java.awt.Color(245, 172, 62));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(1);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,16 +250,93 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tfBairroActionPerformed
 
     private void btnCadastrar14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar14ActionPerformed
-        new CadastroCliente().setVisible(true);
+        Usuario u = new Usuario();
+        UsuarioDAO dao = new UsuarioDAO();
+        u.setNome(tfNome.getText());
+        u.setSobrenome(tfSobreNome.getText());
+        u.setLogin(tfUsuario.getText());
+        if (Arrays.equals(jpSenha.getPassword(), jpRepetirSenha.getPassword())) {
+            char[] s = jpSenha.getPassword();
+            String senha = "";
+            for (char a : s) {
+                senha += a;
+            }
+            u.setSenha(senha);
+        }
+        dao.create(u);
+        ReadJTable();
     }//GEN-LAST:event_btnCadastrar14ActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        new AlterarCliente().setVisible(true);
+        Usuario u = new Usuario();
+        UsuarioDAO dao = new UsuarioDAO();
+        u.setNome(tfNome.getText());
+        u.setSobrenome(tfSobreNome.getText());
+        u.setLogin(tfUsuario.getText());
+        if (Arrays.equals(jpSenha.getPassword(), jpRepetirSenha.getPassword())) {
+            char[] s = jpSenha.getPassword();
+            String senha = "";
+            for (char a : s) {
+                senha += a;
+            }
+            u.setSenha(senha);
+
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                dao.update(u);
+                ReadJTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "As senhas não são iguais!");
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        if (jTable1.getSelectedRow() != -1) {
+            int r = jTable1.getSelectedRow();
+            tfNome.setText(String.valueOf(jTable1.getValueAt(r, 1)));
+            tfSobreNome.setText(String.valueOf(jTable1.getValueAt(r, 2)));
+            tfUsuario.setText(String.valueOf(jTable1.getValueAt(r, 3)));
+            jpSenha.setText("");
+            jpRepetirSenha.setText("");
+        }
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        if (jTable1.getSelectedRow() != -1) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                Usuario u = new Usuario();
+                UsuarioDAO dao = new UsuarioDAO();
+                u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                dao.delete(u);
+                ReadJTable();
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            if (jTable1.getSelectedRow() != -1) {
+                if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    Usuario u = new Usuario();
+                    UsuarioDAO dao = new UsuarioDAO();
+                    u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                    dao.delete(u);
+                    ReadJTable();
+                }
+            }
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    public void ReadJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        UsuarioDAO dao = new UsuarioDAO();
+
+        for (Usuario u : dao.read()) {
+            modelo.addRow(new Object[]{u.getId(), u.getNome(), u.getSobrenome(), u.getLogin()});
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -280,176 +371,20 @@ public class Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCadastrar1;
-    private javax.swing.JButton btnCadastrar10;
-    private javax.swing.JButton btnCadastrar11;
-    private javax.swing.JButton btnCadastrar12;
     private javax.swing.JButton btnCadastrar14;
-    private javax.swing.JButton btnCadastrar2;
-    private javax.swing.JButton btnCadastrar3;
-    private javax.swing.JButton btnCadastrar4;
-    private javax.swing.JButton btnCadastrar5;
-    private javax.swing.JButton btnCadastrar6;
-    private javax.swing.JButton btnCadastrar7;
-    private javax.swing.JButton btnCadastrar8;
-    private javax.swing.JButton btnCadastrar9;
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel80;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField10;
-    private javax.swing.JPasswordField jPasswordField11;
-    private javax.swing.JPasswordField jPasswordField12;
-    private javax.swing.JPasswordField jPasswordField13;
-    private javax.swing.JPasswordField jPasswordField14;
-    private javax.swing.JPasswordField jPasswordField15;
-    private javax.swing.JPasswordField jPasswordField16;
-    private javax.swing.JPasswordField jPasswordField17;
-    private javax.swing.JPasswordField jPasswordField18;
-    private javax.swing.JPasswordField jPasswordField19;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField20;
-    private javax.swing.JPasswordField jPasswordField21;
-    private javax.swing.JPasswordField jPasswordField22;
-    private javax.swing.JPasswordField jPasswordField23;
-    private javax.swing.JPasswordField jPasswordField24;
-    private javax.swing.JPasswordField jPasswordField25;
-    private javax.swing.JPasswordField jPasswordField26;
-    private javax.swing.JPasswordField jPasswordField27;
-    private javax.swing.JPasswordField jPasswordField28;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JPasswordField jPasswordField4;
-    private javax.swing.JPasswordField jPasswordField5;
-    private javax.swing.JPasswordField jPasswordField6;
-    private javax.swing.JPasswordField jPasswordField7;
-    private javax.swing.JPasswordField jPasswordField8;
-    private javax.swing.JPasswordField jPasswordField9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField tfBairro;
-    private javax.swing.JTextField tfBairro1;
-    private javax.swing.JTextField tfBairro10;
-    private javax.swing.JTextField tfBairro11;
-    private javax.swing.JTextField tfBairro12;
-    private javax.swing.JTextField tfBairro13;
-    private javax.swing.JTextField tfBairro2;
-    private javax.swing.JTextField tfBairro3;
-    private javax.swing.JTextField tfBairro4;
-    private javax.swing.JTextField tfBairro5;
-    private javax.swing.JTextField tfBairro6;
-    private javax.swing.JTextField tfBairro7;
-    private javax.swing.JTextField tfBairro8;
-    private javax.swing.JTextField tfBairro9;
+    private javax.swing.JPasswordField jpRepetirSenha;
+    private javax.swing.JPasswordField jpSenha;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfNome1;
-    private javax.swing.JTextField tfNome10;
-    private javax.swing.JTextField tfNome11;
-    private javax.swing.JTextField tfNome12;
-    private javax.swing.JTextField tfNome13;
-    private javax.swing.JTextField tfNome2;
-    private javax.swing.JTextField tfNome3;
-    private javax.swing.JTextField tfNome4;
-    private javax.swing.JTextField tfNome5;
-    private javax.swing.JTextField tfNome6;
-    private javax.swing.JTextField tfNome7;
-    private javax.swing.JTextField tfNome8;
-    private javax.swing.JTextField tfNome9;
     private javax.swing.JTextField tfSobreNome;
-    private javax.swing.JTextField tfSobreNome1;
-    private javax.swing.JTextField tfSobreNome10;
-    private javax.swing.JTextField tfSobreNome11;
-    private javax.swing.JTextField tfSobreNome12;
-    private javax.swing.JTextField tfSobreNome13;
-    private javax.swing.JTextField tfSobreNome2;
-    private javax.swing.JTextField tfSobreNome3;
-    private javax.swing.JTextField tfSobreNome4;
-    private javax.swing.JTextField tfSobreNome5;
-    private javax.swing.JTextField tfSobreNome6;
-    private javax.swing.JTextField tfSobreNome7;
-    private javax.swing.JTextField tfSobreNome8;
-    private javax.swing.JTextField tfSobreNome9;
+    private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }

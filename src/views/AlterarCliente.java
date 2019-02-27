@@ -42,7 +42,7 @@ public class AlterarCliente extends javax.swing.JFrame {
             data = f.parse(c.getData_nasc());
             jDateChooser1.getDateEditor().setDate(data);
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Não foi possivel converter a data!");
+            JOptionPane.showMessageDialog(null, "Não foi possivel converter a data!\n" + ex);
         }
 
         tfNome.setText(c.getNome());
@@ -337,33 +337,35 @@ public class AlterarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (tfNome.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
-        } else if (tfSobreNome.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo \"Sobrenome\" deve estar preenchido!");
-        } else if (tfSobreNome.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
-        } else {
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-            Date d = jDateChooser1.getDate();
-            String data = f.format(d);
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + c.getNome() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (tfNome.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
+            } else if (tfSobreNome.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "O campo \"Sobrenome\" deve estar preenchido!");
+            } else if (tfSobreNome.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
+            } else {
+                SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+                Date d = jDateChooser1.getDate();
+                String data = f.format(d);
 
-            c.setNome(tfNome.getText().trim());
-            c.setSobrenome(tfSobreNome.getText().trim());
-            c.setCpf(ftCPF.getText().trim());
-            c.setData_nasc(data);
-            c.setEndereco(tfEndereco.getText().trim());
-            c.setBairro(tfBairro.getText().trim());
-            c.setRegiao(cbRegiao.getSelectedItem().toString());
-            c.setTelefone(ftTelefone.getText().trim());
-            c.setCelular(ftCelular.getText().trim());
-            c.setEmail(tfEmail.getText().trim());
-            c.setDescricao(jTextArea1.getText());
-            dao.update(c);
-            Dashboard db = new Dashboard();
-            db.readJTable();
-            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
-            this.dispose();
+                c.setNome(tfNome.getText().trim());
+                c.setSobrenome(tfSobreNome.getText().trim());
+                c.setCpf(ftCPF.getText().trim());
+                c.setData_nasc(data);
+                c.setEndereco(tfEndereco.getText().trim());
+                c.setBairro(tfBairro.getText().trim());
+                c.setRegiao(cbRegiao.getSelectedItem().toString());
+                c.setTelefone(ftTelefone.getText().trim());
+                c.setCelular(ftCelular.getText().trim());
+                c.setEmail(tfEmail.getText().trim());
+                c.setDescricao(jTextArea1.getText());
+                dao.update(c);
+                Dashboard db = new Dashboard();
+                db.readJTable();
+                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
