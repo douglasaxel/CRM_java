@@ -5,7 +5,10 @@
         <group>
             <file>file:/home/douglas/workspace/Java/CRM/src/views/CadastroCliente.java</file>
             <file>file:/home/douglas/workspace/Java/CRM/src/views/AlterarCliente.java</file>
+            <file>file:/home/douglas/workspace/Java/CRM/src/views/Usuarios.java</file>
             <file>file:/home/douglas/workspace/Java/CRM/src/views/Dashboard.java</file>
+            <file>file:/home/douglas/workspace/Java/CRM/src/bean/Usuario.java</file>
+            <file>file:/home/douglas/workspace/Java/CRM/src/dao/UsuarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -166,35 +166,42 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         tfNomeSobre.setEditable(false);
+        tfNomeSobre.setBackground(new java.awt.Color(255, 255, 255));
         tfNomeSobre.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfNomeSobre.setBorder(null);
         tfNomeSobre.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfDataNasc.setEditable(false);
+        tfDataNasc.setBackground(new java.awt.Color(255, 255, 255));
         tfDataNasc.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfDataNasc.setBorder(null);
         tfDataNasc.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfEndereco.setEditable(false);
+        tfEndereco.setBackground(new java.awt.Color(255, 255, 255));
         tfEndereco.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEndereco.setBorder(null);
         tfEndereco.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfBairro.setEditable(false);
+        tfBairro.setBackground(new java.awt.Color(255, 255, 255));
         tfBairro.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfBairro.setBorder(null);
         tfBairro.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfRegiao.setEditable(false);
+        tfRegiao.setBackground(new java.awt.Color(255, 255, 255));
         tfRegiao.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfRegiao.setBorder(null);
         tfRegiao.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfEmail.setEditable(false);
+        tfEmail.setBackground(new java.awt.Color(255, 255, 255));
         tfEmail.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEmail.setBorder(null);
         tfEmail.setSelectionColor(new java.awt.Color(62, 194, 235));
 
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
@@ -206,6 +213,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel20.setText("Comentário:");
 
         ftTelefone.setEditable(false);
+        ftTelefone.setBackground(new java.awt.Color(255, 255, 255));
         ftTelefone.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftTelefone.setBorder(null);
         ftTelefone.setSelectionColor(new java.awt.Color(62, 194, 235));
@@ -216,11 +224,13 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         ftCelular.setEditable(false);
+        ftCelular.setBackground(new java.awt.Color(255, 255, 255));
         ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftCelular.setBorder(null);
         ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         ftCPF.setEditable(false);
+        ftCPF.setBackground(new java.awt.Color(255, 255, 255));
         ftCPF.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftCPF.setBorder(null);
         ftCPF.setSelectionColor(new java.awt.Color(62, 194, 235));
@@ -272,40 +282,40 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNomeSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfNomeSobre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(ftCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel16)
                 .addGap(5, 5, 5)
-                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel17)
                 .addGap(5, 5, 5)
-                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
                 .addGap(1, 1, 1)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

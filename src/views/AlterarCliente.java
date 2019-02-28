@@ -6,6 +6,7 @@
 package views;
 
 import bean.Cliente;
+import bean.Estilo;
 import dao.ClienteDAO;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -349,12 +350,12 @@ public class AlterarCliente extends javax.swing.JFrame {
                 Date d = jDateChooser1.getDate();
                 String data = f.format(d);
 
-                c.setNome(tfNome.getText().trim());
-                c.setSobrenome(tfSobreNome.getText().trim());
+                c.setNome(Estilo.primeiraLetra(tfNome.getText().trim()));
+                c.setSobrenome(Estilo.primeiraLetra(tfSobreNome.getText().trim()));
                 c.setCpf(ftCPF.getText().trim());
                 c.setData_nasc(data);
-                c.setEndereco(tfEndereco.getText().trim());
-                c.setBairro(tfBairro.getText().trim());
+                c.setEndereco(Estilo.primeiraLetra(tfEndereco.getText().trim()));
+                c.setBairro(Estilo.primeiraLetra(tfBairro.getText().trim()));
                 c.setRegiao(cbRegiao.getSelectedItem().toString());
                 c.setTelefone(ftTelefone.getText().trim());
                 c.setCelular(ftCelular.getText().trim());

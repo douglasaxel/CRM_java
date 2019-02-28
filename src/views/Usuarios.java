@@ -1,5 +1,6 @@
 package views;
 
+import bean.Estilo;
 import bean.Usuario;
 import dao.UsuarioDAO;
 import java.awt.event.KeyEvent;
@@ -16,7 +17,7 @@ public class Usuarios extends javax.swing.JFrame {
     public Usuarios() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
-        ReadJTable();
+        readJTable();
     }
 
     /**
@@ -73,11 +74,6 @@ public class Usuarios extends javax.swing.JFrame {
         tfUsuario.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
         tfUsuario.setSelectionColor(new java.awt.Color(62, 194, 235));
-        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBairroActionPerformed(evt);
-            }
-        });
 
         jLabel79.setBackground(new java.awt.Color(255, 255, 255));
         jLabel79.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
@@ -245,15 +241,11 @@ public class Usuarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBairroActionPerformed
-
     private void btnCadastrar14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar14ActionPerformed
         Usuario u = new Usuario();
         UsuarioDAO dao = new UsuarioDAO();
-        u.setNome(tfNome.getText());
-        u.setSobrenome(tfSobreNome.getText());
+        u.setNome(Estilo.primeiraLetra(tfNome.getText()));
+        u.setSobrenome(Estilo.primeiraLetra(tfSobreNome.getText()));
         u.setLogin(tfUsuario.getText());
         if (Arrays.equals(jpSenha.getPassword(), jpRepetirSenha.getPassword())) {
             char[] s = jpSenha.getPassword();
@@ -262,14 +254,19 @@ public class Usuarios extends javax.swing.JFrame {
                 senha += a;
             }
             u.setSenha(senha);
+            dao.create(u);
+            readJTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Senhas não conferem!");
+            jpSenha.setText("");
+            jpRepetirSenha.setText("");
         }
-        dao.create(u);
-        ReadJTable();
     }//GEN-LAST:event_btnCadastrar14ActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         Usuario u = new Usuario();
         UsuarioDAO dao = new UsuarioDAO();
+        u.setId(Long.parseLong(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
         u.setNome(tfNome.getText());
         u.setSobrenome(tfSobreNome.getText());
         u.setLogin(tfUsuario.getText());
@@ -280,13 +277,21 @@ public class Usuarios extends javax.swing.JFrame {
                 senha += a;
             }
             u.setSenha(senha);
+            JOptionPane.showMessageDialog(null, senha);
 
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dao.update(u);
-                ReadJTable();
+                readJTable();
+                tfNome.setText("");
+                tfSobreNome.setText("");
+                tfUsuario.setText("");
+                jpSenha.setText("");
+                jpRepetirSenha.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "As senhas não são iguais!");
+            jpSenha.setText("");
+            jpRepetirSenha.setText("");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -308,7 +313,7 @@ public class Usuarios extends javax.swing.JFrame {
                 UsuarioDAO dao = new UsuarioDAO();
                 u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
                 dao.delete(u);
-                ReadJTable();
+                readJTable();
             }
         }
     }//GEN-LAST:event_btnDeletarActionPerformed
@@ -321,13 +326,13 @@ public class Usuarios extends javax.swing.JFrame {
                     UsuarioDAO dao = new UsuarioDAO();
                     u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
                     dao.delete(u);
-                    ReadJTable();
+                    readJTable();
                 }
             }
         }
     }//GEN-LAST:event_jTable1KeyReleased
 
-    public void ReadJTable() {
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         UsuarioDAO dao = new UsuarioDAO();
