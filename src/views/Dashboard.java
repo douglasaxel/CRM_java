@@ -166,42 +166,35 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         tfNomeSobre.setEditable(false);
-        tfNomeSobre.setBackground(new java.awt.Color(255, 255, 255));
         tfNomeSobre.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfNomeSobre.setBorder(null);
         tfNomeSobre.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfDataNasc.setEditable(false);
-        tfDataNasc.setBackground(new java.awt.Color(255, 255, 255));
         tfDataNasc.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfDataNasc.setBorder(null);
         tfDataNasc.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfEndereco.setEditable(false);
-        tfEndereco.setBackground(new java.awt.Color(255, 255, 255));
         tfEndereco.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEndereco.setBorder(null);
         tfEndereco.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfBairro.setEditable(false);
-        tfBairro.setBackground(new java.awt.Color(255, 255, 255));
         tfBairro.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfBairro.setBorder(null);
         tfBairro.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfRegiao.setEditable(false);
-        tfRegiao.setBackground(new java.awt.Color(255, 255, 255));
         tfRegiao.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfRegiao.setBorder(null);
         tfRegiao.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         tfEmail.setEditable(false);
-        tfEmail.setBackground(new java.awt.Color(255, 255, 255));
         tfEmail.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEmail.setBorder(null);
         tfEmail.setSelectionColor(new java.awt.Color(62, 194, 235));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
@@ -213,7 +206,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel20.setText("Comentário:");
 
         ftTelefone.setEditable(false);
-        ftTelefone.setBackground(new java.awt.Color(255, 255, 255));
         ftTelefone.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftTelefone.setBorder(null);
         ftTelefone.setSelectionColor(new java.awt.Color(62, 194, 235));
@@ -224,13 +216,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         ftCelular.setEditable(false);
-        ftCelular.setBackground(new java.awt.Color(255, 255, 255));
         ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftCelular.setBorder(null);
         ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         ftCPF.setEditable(false);
-        ftCPF.setBackground(new java.awt.Color(255, 255, 255));
         ftCPF.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         ftCPF.setBorder(null);
         ftCPF.setSelectionColor(new java.awt.Color(62, 194, 235));

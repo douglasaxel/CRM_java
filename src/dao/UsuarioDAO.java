@@ -42,10 +42,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getLong(1));
-                u.setLogin(rs.getString(2));
-                u.setSenha(rs.getString(3));
-                u.setNome(rs.getString(4));
-                u.setSobrenome(rs.getString(5));
+                u.setNome(rs.getString(2));
+                u.setSobrenome(rs.getString(3));
+                u.setLogin(rs.getString(4));
+                u.setSenha(rs.getString(5));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -99,10 +99,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getLong(1));
-                u.setLogin(rs.getString(2));
-                u.setSenha(rs.getString(3));
-                u.setNome(rs.getString(4));
-                u.setSobrenome(rs.getString(5));
+                u.setNome(rs.getString(2));
+                u.setSobrenome(rs.getString(3));
+                u.setLogin(rs.getString(4));
+                u.setSenha(rs.getString(5));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -124,10 +124,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getLong(1));
-                u.setLogin(rs.getString(2));
-                u.setSenha(rs.getString(3));
-                u.setNome(rs.getString(4));
-                u.setSobrenome(rs.getString(5));
+                u.setNome(rs.getString(2));
+                u.setSobrenome(rs.getString(3));
+                u.setLogin(rs.getString(4));
+                u.setSenha(rs.getString(5));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -149,10 +149,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getLong(1));
-                u.setLogin(rs.getString(2));
-                u.setSenha(rs.getString(3));
-                u.setNome(rs.getString(4));
-                u.setSobrenome(rs.getString(5));
+                u.setNome(rs.getString(2));
+                u.setSobrenome(rs.getString(3));
+                u.setLogin(rs.getString(4));
+                u.setSenha(rs.getString(5));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -160,7 +160,7 @@ public class UsuarioDAO {
         }
         return lista;
     }
-    
+
     public List<Usuario> search_by_login(String login) {
         Connection conn = ConnectionBD.getConnection();
         PreparedStatement stmt = null;
@@ -174,10 +174,10 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getLong(1));
-                u.setLogin(rs.getString(2));
-                u.setSenha(rs.getString(3));
-                u.setNome(rs.getString(4));
-                u.setSobrenome(rs.getString(5));
+                u.setNome(rs.getString(2));
+                u.setSobrenome(rs.getString(3));
+                u.setLogin(rs.getString(4));
+                u.setSenha(rs.getString(5));
                 lista.add(u);
             }
         } catch (SQLException ex) {

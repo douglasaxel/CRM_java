@@ -39,7 +39,7 @@ public class ConnectionBD {
 
     public static void closeConnection(Connection conn, PreparedStatement stmt) {
         closeConnection(conn);
-        
+
         try {
             if (stmt != null) {
                 stmt.close();
@@ -48,10 +48,10 @@ public class ConnectionBD {
             JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão." + ex);
         }
     }
-    
+
     public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs) {
         closeConnection(conn, stmt);
-        
+
         try {
             if (rs != null) {
                 rs.close();
