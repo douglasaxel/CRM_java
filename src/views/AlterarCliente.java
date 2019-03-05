@@ -362,9 +362,9 @@ public class AlterarCliente extends javax.swing.JFrame {
                 c.setEmail(tfEmail.getText().trim());
                 c.setDescricao(jTextArea1.getText());
                 dao.update(c);
-                Dashboard db = new Dashboard();
-                db.readJTable();
                 JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+                Dashboard db = new Dashboard();
+                db.setVisible(true);
                 this.dispose();
             }
         }

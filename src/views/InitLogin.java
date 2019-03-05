@@ -146,7 +146,7 @@ public class InitLogin extends javax.swing.JFrame {
     private void bntEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEntrarActionPerformed
         String usu = txtUsuario.getText();
         char[] pass = txtSenha.getPassword();
-        if (readUsuario(usu) && readSenha(pass)) {
+        if ((readUsuario(usu) && readSenha(pass)) || (readUsuario(usu) && readSenha(pass))) {
             Dashboard d = new Dashboard();
             d.lblBemVindo.setText(buscarUsuario().getNome());
             d.setVisible(true);
