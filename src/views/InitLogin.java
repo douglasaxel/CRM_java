@@ -1,5 +1,6 @@
 package views;
 
+import bean.SendMail;
 import bean.Usuario;
 import dao.UsuarioDAO;
 import java.awt.event.KeyEvent;
