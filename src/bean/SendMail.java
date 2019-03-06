@@ -10,8 +10,8 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 public class SendMail {
-
-    public static void main(String[] args) {
+    
+    public void sendMail(String para, String assunto, String mensagem){
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -24,18 +24,17 @@ public class SendMail {
                 return new PasswordAuthentication("douglasaxelkjellin2@gmail.com", "@Douglas1337");
             }
         });
-        
+
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("douglasaxelkjellin2@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("douglasaxelkjellin@gmail.com, douglasaxelkjellin3@gmail.com"));
-            message.setSubject("testando");
-            message.setText("roberto\nfelipe\nantonio");
-            
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));
+            message.setSubject(assunto);
+            message.setText(mensagem);
+
             Transport.send(message);
-            JOptionPane.showMessageDialog(null, "Enviou carai");
         } catch (Exception e) {
-            System.err.print("erro\n" + e);
+            JOptionPane.showMessageDialog(null, "erro\n" + e);
         }
     }
 }

@@ -363,8 +363,6 @@ public class AlterarCliente extends javax.swing.JFrame {
                 c.setDescricao(jTextArea1.getText());
                 dao.update(c);
                 JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
-                Dashboard db = new Dashboard();
-                db.setVisible(true);
                 this.dispose();
             }
         }

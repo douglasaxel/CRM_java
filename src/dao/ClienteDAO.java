@@ -106,6 +106,21 @@ public class ClienteDAO {
             ConnectionBD.closeConnection(conn, stmt);
         }
     }
+    
+    public void update_comment(Cliente c) {
+        Connection conn = ConnectionBD.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("update cliente set descricao=? where id_cli=?");
+            stmt.setString(1, c.getDescricao());
+            stmt.setString(2, String.valueOf(c.getId()));
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados no banco de dados!\n" + ex);
+        } finally {
+            ConnectionBD.closeConnection(conn, stmt);
+        }
+    }
 
     public List<Cliente> search_by_id(String id) {
         Connection conn = ConnectionBD.getConnection();
@@ -275,6 +290,38 @@ public class ClienteDAO {
         try {
             stmt = conn.prepareStatement("select * from cliente where regiao like ?");
             stmt.setString(1, "%" + regiao + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setId(rs.getLong(1));
+                c.setNome(rs.getString(2));
+                c.setSobrenome(rs.getString(3));
+                c.setCpf(rs.getString(4));
+                c.setData_nasc(rs.getString(5));
+                c.setEndereco(rs.getString(6));
+                c.setBairro(rs.getString(7));
+                c.setRegiao(rs.getString(8));
+                c.setTelefone(rs.getString(9));
+                c.setCelular(rs.getString(10));
+                c.setEmail(rs.getString(11));
+                c.setDescricao(rs.getString(12));
+                lista.add(c);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao filtrar dados no banco de dados.\n" + ex);
+        }
+        return lista;
+    }
+    
+    public List<Cliente> search_by_data(String data) {
+        Connection conn = ConnectionBD.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Cliente> lista = new ArrayList<>();
+        try {
+            stmt = conn.prepareStatement("select * from cliente where data_nasc like ?");
+            stmt.setString(1, "%" + data + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
