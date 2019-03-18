@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Aniversariantes extends javax.swing.JFrame {
 
+    public static Aniversariantes instance = null;
+    
     public Aniversariantes() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
@@ -167,7 +169,9 @@ public class Aniversariantes extends javax.swing.JFrame {
         ClienteDAO dao = new ClienteDAO();
 
         for (Cliente c : dao.search_by_data(data)) {
-            modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getSobrenome()});
+//            if (data.equals(c.getDia_env())) {
+                modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getSobrenome()});
+//            }
         }
     }
 

@@ -4,7 +4,7 @@ package bean;
  * @author Douglas Kjellin <douglasaxelkjellin@gmail.com>
  */
 public class Cliente {
-    private long id;
+    private String id;
     private String nome;
     private String sobrenome;
     private String cpf;
@@ -16,12 +16,13 @@ public class Cliente {
     private String celular;
     private String email;
     private String descricao;
+    private String dia_env;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -111,6 +112,14 @@ public class Cliente {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getDia_env() {
+        return dia_env;
+    }
+
+    public void setDia_env(String dia_env) {
+        this.dia_env = dia_env;
     }
     
 }

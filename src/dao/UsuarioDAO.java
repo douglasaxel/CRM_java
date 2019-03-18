@@ -1,5 +1,6 @@
 package dao;
 
+import bean.Encriptador;
 import bean.Usuario;
 import connection.ConnectionBD;
 import java.sql.Connection;
@@ -11,6 +12,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
+    
+    Encriptador en;
+    
+    public UsuarioDAO() {
+        en = new Encriptador();
+    }
 
     public void create(Usuario u) {
         Connection conn = ConnectionBD.getConnection();
@@ -20,7 +27,7 @@ public class UsuarioDAO {
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSobrenome());
             stmt.setString(3, u.getLogin());
-            stmt.setString(4, u.getSenha());
+            stmt.setString(4, Encriptador.encrypt(u.getSenha()));
             stmt.executeUpdate();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados no banco de dados.\n" + e);
@@ -41,11 +48,11 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getLong(1));
+                u.setId(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
-                u.setSenha(rs.getString(5));
+                u.setSenha(Encriptador.decrypt(rs.getString(5)));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -62,8 +69,8 @@ public class UsuarioDAO {
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSobrenome());
             stmt.setString(3, u.getLogin());
-            stmt.setString(4, u.getSenha());
-            stmt.setString(5, String.valueOf(u.getId()));
+            stmt.setString(4, Encriptador.encrypt(u.getSenha()));
+            stmt.setString(5, u.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados no banco de dados!\n" + ex);
@@ -77,7 +84,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         try {
             stmt = conn.prepareStatement("delete from usuario where id_usu = ?");
-            stmt.setLong(1, c.getId());
+            stmt.setString(1, c.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar dados no banco de dados.\n" + e);
@@ -98,7 +105,7 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getLong(1));
+                u.setId(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
@@ -123,11 +130,11 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getLong(1));
+                u.setId(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
-                u.setSenha(rs.getString(5));
+                u.setSenha(Encriptador.decrypt(rs.getString(5)));
                 lista.add(u);
             }
         } catch (SQLException ex) {
@@ -148,7 +155,7 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getLong(1));
+                u.setId(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
@@ -173,11 +180,11 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getLong(1));
+                u.setId(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
-                u.setSenha(rs.getString(5));
+                u.setSenha(Encriptador.decrypt(rs.getString(5)));
                 lista.add(u);
             }
         } catch (SQLException ex) {

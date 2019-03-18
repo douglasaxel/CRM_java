@@ -2,6 +2,7 @@ package views;
 
 import bean.Estilo;
 import bean.Cliente;
+import bean.Encriptador;
 import dao.ClienteDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,11 +61,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         setTitle("Cadastro de Cliente");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
@@ -293,11 +289,12 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        
         if (tfNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
         } else if (tfSobreNome.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Sobrenome\" deve estar preenchido!");
-        } else if (tfSobreNome.getText().trim().equals("")) {
+        } else if (ftCelular.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
         } else {
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
@@ -328,6 +325,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             c.setEmail(tfEmail.getText().trim());
             c.setDescricao(jTextArea1.getText());
             dao.create(c);
+            
             if (JOptionPane.showConfirmDialog(null, "Cliente cadastrado com sucesso!\n\nCadastrar novo cliente?", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 tfNome.setText("");
                 tfSobreNome.setText("");
@@ -341,16 +339,10 @@ public class CadastroCliente extends javax.swing.JFrame {
                 tfEmail.setText("");
                 jTextArea1.setText("");
             } else {
-                Dashboard db = new Dashboard();
-                db.setVisible(true);
                 this.dispose();
             }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        instance = null;
-    }//GEN-LAST:event_formWindowClosed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

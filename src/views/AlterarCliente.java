@@ -90,8 +90,6 @@ public class AlterarCliente extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         tfNome = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
-        ftCelular = new javax.swing.JTextField();
-        ftTelefone = new javax.swing.JTextField();
         cbRegiao = new javax.swing.JComboBox<>();
         tfBairro = new javax.swing.JTextField();
         tfEndereco = new javax.swing.JTextField();
@@ -111,15 +109,12 @@ public class AlterarCliente extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        ftTelefone = new javax.swing.JFormattedTextField();
+        ftCelular = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar informações");
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
@@ -143,14 +138,6 @@ public class AlterarCliente extends javax.swing.JFrame {
         tfEmail.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         tfEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
         tfEmail.setSelectionColor(new java.awt.Color(62, 194, 235));
-
-        ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        ftCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
-        ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
-
-        ftTelefone.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        ftTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
-        ftTelefone.setSelectionColor(new java.awt.Color(62, 194, 235));
 
         cbRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zona Norte", "Zona Nordeste", "Zona Leste", "Região do Glória e do Cristal", "Zona Sul", "Região do Partenon", "Zona Extremo Sul" }));
         cbRegiao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
@@ -235,6 +222,24 @@ public class AlterarCliente extends javax.swing.JFrame {
         jTextArea1.setSelectionColor(new java.awt.Color(62, 194, 235));
         jScrollPane2.setViewportView(jTextArea1);
 
+        ftTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
+        try {
+            ftTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftTelefone.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        ftTelefone.setSelectionColor(new java.awt.Color(62, 194, 235));
+
+        ftCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 172, 62)));
+        try {
+            ftCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftCelular.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        ftCelular.setSelectionColor(new java.awt.Color(62, 194, 235));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -252,8 +257,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                     .addComponent(tfEmail)
                     .addComponent(ftCPF)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ftTelefone)
-                    .addComponent(ftCelular, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbRegiao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -262,12 +266,13 @@ public class AlterarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17)
                             .addComponent(jLabel19)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel17))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cbRegiao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ftCelular)
+                    .addComponent(ftTelefone))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -304,12 +309,12 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel17)
-                .addGap(8, 8, 8)
-                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ftTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addGap(7, 7, 7)
+                .addComponent(ftCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,7 +348,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "O campo \"Nome\" deve estar preenchido!");
             } else if (tfSobreNome.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "O campo \"Sobrenome\" deve estar preenchido!");
-            } else if (tfSobreNome.getText().trim().equals("")) {
+            } else if (ftCelular.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "O campo \"Celular\" deve estar preenchido!");
             } else {
                 SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
@@ -368,10 +373,6 @@ public class AlterarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        instance = null;
-    }//GEN-LAST:event_formWindowClosed
-
     /**
      * @param args the command line arguments
      */
@@ -383,7 +384,7 @@ public class AlterarCliente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -411,8 +412,8 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JComboBox<String> cbRegiao;
     private javax.swing.JFormattedTextField ftCPF;
-    private javax.swing.JTextField ftCelular;
-    private javax.swing.JTextField ftTelefone;
+    private javax.swing.JFormattedTextField ftCelular;
+    private javax.swing.JFormattedTextField ftTelefone;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

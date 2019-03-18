@@ -266,7 +266,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         Usuario u = new Usuario();
         UsuarioDAO dao = new UsuarioDAO();
-        u.setId(Long.parseLong(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+        u.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         u.setNome(tfNome.getText());
         u.setSobrenome(tfSobreNome.getText());
         u.setLogin(tfUsuario.getText());
@@ -277,7 +277,6 @@ public class Usuarios extends javax.swing.JFrame {
                 senha += a;
             }
             u.setSenha(senha);
-            JOptionPane.showMessageDialog(null, senha);
 
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dao.update(u);
@@ -311,7 +310,7 @@ public class Usuarios extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Usuario u = new Usuario();
                 UsuarioDAO dao = new UsuarioDAO();
-                u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                u.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
                 dao.delete(u);
                 readJTable();
             }
@@ -324,7 +323,7 @@ public class Usuarios extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar os dados de " + tfNome.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     Usuario u = new Usuario();
                     UsuarioDAO dao = new UsuarioDAO();
-                    u.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                    u.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
                     dao.delete(u);
                     readJTable();
                 }

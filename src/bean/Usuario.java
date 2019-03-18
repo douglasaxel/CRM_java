@@ -1,17 +1,17 @@
 package bean;
 
 public class Usuario {
-    private long id;
+    private String id;
     private String login;
     private String senha;
     private String nome;
     private String sobrenome;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

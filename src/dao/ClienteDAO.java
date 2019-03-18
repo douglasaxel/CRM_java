@@ -1,16 +1,22 @@
 package dao;
 
 import bean.Cliente;
+import bean.Encriptador;
 import connection.ConnectionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ClienteDAO {
+
+    public ClienteDAO() {
+    }
 
     public void create(Cliente c) {
         Connection conn = ConnectionBD.getConnection();
@@ -19,14 +25,14 @@ public class ClienteDAO {
             stmt = conn.prepareStatement("insert into cliente(nome, sobrenome, cpf, data_nasc, endereco, bairro, regiao, telefone, celular, email, descricao)values(?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getSobrenome());
-            stmt.setString(3, c.getCpf());
+            stmt.setString(3, Encriptador.encrypt(c.getCpf()));
             stmt.setString(4, c.getData_nasc());
-            stmt.setString(5, c.getEndereco());
-            stmt.setString(6, c.getBairro());
-            stmt.setString(7, c.getRegiao());
-            stmt.setString(8, c.getTelefone());
-            stmt.setString(9, c.getCelular());
-            stmt.setString(10, c.getEmail());
+            stmt.setString(5, Encriptador.encrypt(c.getEndereco()));
+            stmt.setString(6, Encriptador.encrypt(c.getBairro()));
+            stmt.setString(7, Encriptador.encrypt(c.getRegiao()));
+            stmt.setString(8, Encriptador.encrypt(c.getTelefone()));
+            stmt.setString(9, Encriptador.encrypt(c.getCelular()));
+            stmt.setString(10, Encriptador.encrypt(c.getEmail()));
             stmt.setString(11, c.getDescricao());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -48,18 +54,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -75,16 +82,16 @@ public class ClienteDAO {
             stmt = conn.prepareStatement("update cliente set nome=?, sobrenome=?, cpf=?, data_nasc=?, endereco=?, bairro=?, regiao=?, telefone=?, celular=?, email=?, descricao=? where id_cli=?");
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getSobrenome());
-            stmt.setString(3, c.getCpf());
+            stmt.setString(3, Encriptador.encrypt(c.getCpf()));
             stmt.setString(4, c.getData_nasc());
-            stmt.setString(5, c.getEndereco());
-            stmt.setString(6, c.getBairro());
-            stmt.setString(7, c.getRegiao());
-            stmt.setString(8, c.getTelefone());
-            stmt.setString(9, c.getCelular());
-            stmt.setString(10, c.getEmail());
+            stmt.setString(5, Encriptador.encrypt(c.getEndereco()));
+            stmt.setString(6, Encriptador.encrypt(c.getBairro()));
+            stmt.setString(7, Encriptador.encrypt(c.getRegiao()));
+            stmt.setString(8, Encriptador.encrypt(c.getTelefone()));
+            stmt.setString(9, Encriptador.encrypt(c.getCelular()));
+            stmt.setString(10, Encriptador.encrypt(c.getEmail()));
             stmt.setString(11, c.getDescricao());
-            stmt.setString(12, String.valueOf(c.getId()));
+            stmt.setString(12, c.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados no banco de dados!\n" + ex);
@@ -98,7 +105,7 @@ public class ClienteDAO {
         PreparedStatement stmt = null;
         try {
             stmt = conn.prepareStatement("delete from cliente where id_cli = ?");
-            stmt.setLong(1, c.getId());
+            stmt.setString(1, c.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar dados no banco de dados.\n" + e);
@@ -106,7 +113,7 @@ public class ClienteDAO {
             ConnectionBD.closeConnection(conn, stmt);
         }
     }
-    
+
     public void update_comment(Cliente c) {
         Connection conn = ConnectionBD.getConnection();
         PreparedStatement stmt = null;
@@ -134,18 +141,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -166,18 +174,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -198,18 +207,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -230,18 +240,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -262,18 +273,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -294,18 +306,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {
@@ -313,7 +326,7 @@ public class ClienteDAO {
         }
         return lista;
     }
-    
+
     public List<Cliente> search_by_data(String data) {
         Connection conn = ConnectionBD.getConnection();
         PreparedStatement stmt = null;
@@ -326,18 +339,19 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getLong(1));
+                c.setId(rs.getString(1));
                 c.setNome(rs.getString(2));
                 c.setSobrenome(rs.getString(3));
-                c.setCpf(rs.getString(4));
+                c.setCpf(Encriptador.decrypt(rs.getString(4)));
                 c.setData_nasc(rs.getString(5));
-                c.setEndereco(rs.getString(6));
-                c.setBairro(rs.getString(7));
-                c.setRegiao(rs.getString(8));
-                c.setTelefone(rs.getString(9));
-                c.setCelular(rs.getString(10));
-                c.setEmail(rs.getString(11));
+                c.setEndereco(Encriptador.decrypt(rs.getString(6)));
+                c.setBairro(Encriptador.decrypt(rs.getString(7)));
+                c.setRegiao(Encriptador.decrypt(rs.getString(8)));
+                c.setTelefone(Encriptador.decrypt(rs.getString(9)));
+                c.setCelular(Encriptador.decrypt(rs.getString(10)));
+                c.setEmail(Encriptador.decrypt(rs.getString(11)));
                 c.setDescricao(rs.getString(12));
+                c.setDia_env(rs.getString(13));
                 lista.add(c);
             }
         } catch (SQLException ex) {

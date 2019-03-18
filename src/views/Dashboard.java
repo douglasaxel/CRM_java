@@ -31,7 +31,8 @@ public class Dashboard extends javax.swing.JFrame {
         readJTable();
         ClienteDAO dao = new ClienteDAO();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM");
-        if (!dao.search_by_data(formato.format(data)).isEmpty()) {
+        List<Cliente> cl = dao.search_by_data(formato.format(data));
+        if (!cl.isEmpty()) {
             Aniversariantes a = new Aniversariantes();
             a.setVisible(true);
         }
@@ -46,6 +47,7 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -72,7 +74,7 @@ public class Dashboard extends javax.swing.JFrame {
         ftCelular = new javax.swing.JTextField();
         ftCPF = new javax.swing.JTextField();
         salvar_comentario = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        mailBTN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -235,14 +237,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gmail.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setRolloverEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        mailBTN.setBackground(new java.awt.Color(255, 255, 255));
+        mailBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gmail.png"))); // NOI18N
+        mailBTN.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        mailBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mailBTN.setRolloverEnabled(false);
+        mailBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                mailBTNActionPerformed(evt);
             }
         });
 
@@ -293,7 +295,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(salvar_comentario, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mailBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -348,8 +350,8 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(salvar_comentario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mailBTN)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -596,11 +598,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseReleased
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        if (jTable1.getSelectedRow() != 1) {
+        if (jTable1.getSelectedRow() != 0) {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar os dados de " + tfNomeSobre.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ClienteDAO dao = new ClienteDAO();
                 Cliente c = new Cliente();
-                c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                c.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
                 dao.delete(c);
                 readJTable();
             }
@@ -670,7 +672,7 @@ public class Dashboard extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar os dados de " + tfNomeSobre.getText() + "?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ClienteDAO dao = new ClienteDAO();
                 Cliente c = new Cliente();
-                c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                c.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
                 dao.delete(c);
                 readJTable();
             }
@@ -681,17 +683,21 @@ public class Dashboard extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alter os comentários?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             ClienteDAO dao = new ClienteDAO();
             Cliente c = new Cliente();
-            c.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+            c.setId(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
             c.setDescricao(jTextArea1.getText());
             dao.update_comment(c);
             readJTable();
         }
     }//GEN-LAST:event_salvar_comentarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Aniversariantes a = new Aniversariantes();
-        a.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void mailBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailBTNActionPerformed
+        if (Aniversariantes.instance == null) {
+            Aniversariantes.instance = new Aniversariantes();
+            Aniversariantes.instance.setVisible(true);
+        } else {
+            Aniversariantes.instance.setVisible(true);
+        }
+    }//GEN-LAST:event_mailBTNActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -732,6 +738,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         for (Cliente c : dao.read()) {
             modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getSobrenome(), c.getCelular(), c.getEmail(), c.getRegiao()});
+
         }
     }
 
@@ -813,7 +820,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField ftCPF;
     private javax.swing.JTextField ftCelular;
     private javax.swing.JTextField ftTelefone;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -834,12 +840,14 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     public javax.swing.JLabel lblBemVindo;
     private javax.swing.JLabel lblData;
+    private javax.swing.JButton mailBTN;
     private javax.swing.JButton salvar_comentario;
     private javax.swing.JComboBox<String> selFiltrar;
     private javax.swing.JTextField tfBairro;
