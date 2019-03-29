@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/douglas/workspace/Java/CRM/src/views/InitLogin.java</file>
-            <file>file:/home/douglas/workspace/Java/CRM/src/views/CadastroCliente.java</file>
-            <file>file:/home/douglas/workspace/Java/CRM/src/views/Teste.java</file>
-            <file>file:/home/douglas/workspace/Java/CRM/src/dao/ClienteDAO.java</file>
+            <file>file:/home/douglas/workspace/Java/CRM/src/views/Aniversariantes.java</file>
+            <file>file:/home/douglas/workspace/Java/CRM/src/views/CadastrarTemplateEmail.java</file>
             <file>file:/home/douglas/workspace/Java/CRM/src/views/Dashboard.java</file>
         </group>
     </open-files>

@@ -33,8 +33,8 @@ public class Dashboard extends javax.swing.JFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM");
         List<Cliente> cl = dao.search_by_data(formato.format(data));
         if (!cl.isEmpty()) {
-            Aniversariantes a = new Aniversariantes();
-            a.setVisible(true);
+            Aniversariantes.instance = new Aniversariantes();
+            Aniversariantes.instance.setVisible(true);
         }
     }
 
@@ -640,7 +640,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFiltrarKeyReleased
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        if (!txtFiltrar.getText().trim().equals("") || txtFiltrar.getText().equals("Pesquisar...")) {
+        if (!txtFiltrar.getText().trim().equals("")) {
             int op = selFiltrar.getSelectedIndex();
             switch (op) {
                 case 0:
@@ -700,11 +700,6 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_mailBTNActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {

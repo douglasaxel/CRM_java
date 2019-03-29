@@ -38,6 +38,11 @@ public class Aniversariantes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Aniversariantes");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 85, 156)));
 
@@ -134,6 +139,10 @@ public class Aniversariantes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Não há aniversariantes para enviar e-mail hoje.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Aniversariantes.instance = null;
+    }//GEN-LAST:event_formWindowClosed
 
     public static void main(String args[]) {
 

@@ -115,6 +115,11 @@ public class AlterarCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar informações");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 198, 62)));
@@ -372,6 +377,10 @@ public class AlterarCliente extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        AlterarCliente.instance = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
