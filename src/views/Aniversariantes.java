@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class Aniversariantes extends javax.swing.JFrame {
 
     public static Aniversariantes instance = null;
-    
+
     public Aniversariantes() {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo32x32.png")).getImage());
@@ -132,7 +132,15 @@ public class Aniversariantes extends javax.swing.JFrame {
             for (int i = 1; i <= jTable1.getRowCount(); i++) {
                 clist = dao.search_by_id(jTable1.getValueAt((i - 1), 0).toString());
                 c = clist.get(i - 1);
-                sm.sendMail(c.getEmail(), "Feliz Aniversário " + c.getNome(), "Apenas um teste mesmo!!!!!!!!");
+                sm.sendMail(c.getEmail(), "Feliz Aniversário " + c.getNome(), "!!!"
+                        + "Eu Pastor Alci desejo Felicidade, paz e alegria\n"
+                        + "que desejo para você neste seu\n"
+                        + "dia tão lindo e especial. Parabéns!\n"
+                        + "\n"
+                        + "Hoje tudo é possível, por isso sonhe\n"
+                        + "ainda mais alto do que já sonhou\n"
+                        + "e conquiste tudo aquilo que ainda\n"
+                        + "não conquistou. Feliz Aniversário!");
             }
             JOptionPane.showMessageDialog(null, "E-mails encaminhados com sucesso!");
         } else {
@@ -179,7 +187,7 @@ public class Aniversariantes extends javax.swing.JFrame {
 
         for (Cliente c : dao.search_by_data(data)) {
 //            if (data.equals(c.getDia_env())) {
-                modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getSobrenome()});
+            modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getSobrenome()});
 //            }
         }
     }
